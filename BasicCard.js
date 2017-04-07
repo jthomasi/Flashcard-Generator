@@ -19,9 +19,4 @@ function Basic(front,back){
 	}
 }
 
-var hey = new Basic("hey there you", "hey yourself");
-
-hey.printFront();
-hey.printBack();
-
 module.exports = Basic;

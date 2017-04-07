@@ -18,7 +18,7 @@ function Cloze(text,cloze){
 		}
 	}
 	this.printPartial = function(){
-		var partial = this.text.replace(this.cloze, '');
+		var partial = this.text.replace(this.cloze, '...');
 		if (partial == this.text){
 			console.log("No cloze or cloze was not in text.");
 		}
@@ -27,11 +27,5 @@ function Cloze(text,cloze){
 		}
 	}
 }
-
-var hey = new Cloze("hey there you", "hey");
-
-hey.printFull();
-hey.printCloze();
-hey.printPartial();
 
 module.exports = Cloze;
