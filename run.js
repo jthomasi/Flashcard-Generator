@@ -80,21 +80,26 @@ function cardsBasic(){
 	  {
 	  	type: "input",
 	    name: "flashcard",
-	    message: "Which card? (Enter 00 to go back to main menu)"
+	    message: "Which card? There are currently "+basic_cards.length+" basic flashcards to choose from! (Enter 00 to go back to main menu)"
 	  }
 	]).then(function(answers) {
 	  
 	  if (answers.flashcard != "00"){
-	  	 questions(answers.flashcard);
+	  	 questionsBasic(answers.flashcard);
 	  }
-	  else i
-	   
+	  else if (answers.flashcard == "00"){
+	  	 run();
+	  }
+	  else{
+	  	console.log("Please enter a proper command");
+	  	cardsBasic();
+	  }
 
 	});
 
 }
 
-function questions(i){
+function questionsBasic(i){
 
 	inquirer.prompt([
 	  {
@@ -107,12 +112,12 @@ function questions(i){
 	    if (answers.flashcard == basic_cards[i].back) {
 	    	console.log("Correct!");
 	    	console.log(basic_cards[i].printFront(), basic_cards[i].printBack());
-	    	run();
+	    	cardsBasic();
 	    }
 	    else {
 	    	console.log("That is incorrect!");
 	    	console.log(basic_cards[i].printFront(), basic_cards[i].printBack());
-	    	run();
+	    	cardsBasic();
 	    }
 
 	});
@@ -121,17 +126,52 @@ function questions(i){
 
 function cardsCloze(){
 
-	for (var i=0;i<cloze_cards.length;i++){
-		console.log("-----------------------------------------------------------------");
-		console.log("Card "+(i+1)+":");
-		cloze_cards[i].printPartial();
-		console.log("-----------------------------------------------------------------");
-		console.log("-----------------------------------------------------------------");
-		cloze_cards[i].printCloze();
-	}
+	inquirer.prompt([
+	  {
+	  	type: "input",
+	    name: "flashcard",
+	    message: "Which card? There are currently "+cloze_cards.length+" cloze flashcards to choose from! (Enter 00 to go back to main menu)"
+	  }
+	]).then(function(answers) {
+	  
+	  if (answers.flashcard != "00"){
+	  	 questionsCloze(answers.flashcard);
+	  }
+	  else if (answers.flashcard == "00"){
+	  	 run();
+	  }
+	  else{
+	  	console.log("Please enter a proper command");
+	  	cardsCloze();
+	  }
 
-	run();
+	});
 	
+}
+
+function questionsCloze(i){
+
+	inquirer.prompt([
+	  {
+	  	type: "input",
+	    name: "flashcard",
+	    message: cloze_cards[i].cloze
+	  }
+	]).then(function(answers) {
+	  
+	    if (answers.flashcard == cloze_cards[i].cloze) {
+	    	console.log("Correct!");
+	    	console.log(cloze_cards[i].printFull());
+	    	cardsCloze();
+	    }
+	    else {
+	    	console.log("That is incorrect!");
+	    	console.log(cloze_cards[i].printFull());
+	    	cardsCloze();
+	    }
+
+	});
+
 }
 
 function run(){
