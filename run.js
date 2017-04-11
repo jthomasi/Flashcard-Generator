@@ -76,16 +76,46 @@ function createCloze() {
 
 function cardsBasic(){
 
-	for (var i=0;i<basic_cards.length;i++){
-		console.log("-----------------------------------------------------------------");
-		console.log("Card "+(i+1)+":");
-		basic_cards[i].printFront();
-		console.log("-----------------------------------------------------------------");
-		console.log("-----------------------------------------------------------------");
-		basic_cards[i].printBack();
-	}
+	inquirer.prompt([
+	  {
+	  	type: "input",
+	    name: "flashcard",
+	    message: "Which card? (Enter 00 to go back to main menu)"
+	  }
+	]).then(function(answers) {
+	  
+	  if (answers.flashcard != "00"){
+	  	 questions(answers.flashcard);
+	  }
+	  else i
+	   
 
-	run();
+	});
+
+}
+
+function questions(i){
+
+	inquirer.prompt([
+	  {
+	  	type: "input",
+	    name: "flashcard",
+	    message: basic_cards[i].front
+	  }
+	]).then(function(answers) {
+	  
+	    if (answers.flashcard == basic_cards[i].back) {
+	    	console.log("Correct!");
+	    	console.log(basic_cards[i].printFront(), basic_cards[i].printBack());
+	    	run();
+	    }
+	    else {
+	    	console.log("That is incorrect!");
+	    	console.log(basic_cards[i].printFront(), basic_cards[i].printBack());
+	    	run();
+	    }
+
+	});
 
 }
 
