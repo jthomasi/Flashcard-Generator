@@ -1,6 +1,5 @@
 var Basic = require('./BasicCard');
 var Cloze = require('./ClozeCard');
-var JSON = require('./cards');
 var inquirer = require("inquirer");
 var basic_cards = [];
 var cloze_cards = [];
@@ -8,12 +7,15 @@ initialCards();
 
 function initialCards() {
 
-	for (var i=0;i<JSON.data.length;i++){
+	var newBasic = new Basic("Who was the the first President of the United States?","George Washington");
+	basic_cards.push(newBasic);
+	var newBasic = new Basic("Who invented the first modern automible?","Karl Benz");
+	basic_cards.push(newBasic);
 
-		var newBasic = new Basic(JSON.basicData[i].front, JSON.basicData[i].back);
-		basic_cards.push(newBasic);
-
-	}
+	var newCloze = new Cloze("The wheels on the bus go round and round","round and round");
+	cloze_cards.push(newCloze);
+	var newCloze = new Cloze("Luke, I am your father","father");
+	cloze_cards.push(newCloze);
 
 	run();
 
@@ -106,8 +108,11 @@ function questionsBasic(i){
 	    message: basic_cards[i].front
 	  }
 	]).then(function(answers) {
+
+	  	var user = answers.flashcard.toLowerCase();
+		var card = basic_cards[i].back.toLowerCase();
 	  
-	    if (answers.flashcard == basic_cards[i].back) {
+	    if (user == card) {
 	    	console.log("Correct!");
 	    	console.log(basic_cards[i].printFront(), basic_cards[i].printBack());
 	    	cardsBasic();
@@ -156,8 +161,11 @@ function questionsCloze(i){
 	    message: cloze_cards[i].partial
 	  }
 	]).then(function(answers) {
+
+		var user = answers.flashcard.toLowerCase();
+		var card = cloze_cards[i].cloze.toLowerCase();
 	  
-	    if (answers.flashcard == cloze_cards[i].cloze) {
+	    if (user == card) {
 	    	console.log("Correct!");
 	    	console.log(cloze_cards[i].printFull());
 	    	cardsCloze();
