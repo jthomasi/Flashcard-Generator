@@ -1,0 +1,4 @@
+{
+	"Basic": {"front": "hey", "back": "there"},
+	"Cloze": {"full": "hey there", "cloze": "there"}
+}
