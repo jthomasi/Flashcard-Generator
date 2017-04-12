@@ -1,6 +1,7 @@
 function Cloze(text,cloze){
 	this.text = text;
 	this.cloze = cloze;
+	this.partial = this.text.replace(this.cloze, '...');
 	this.printFull = function(){
 		if (!this.text) {
 			console.log("No text was entered!");
@@ -18,7 +19,6 @@ function Cloze(text,cloze){
 		}
 	}
 	this.printPartial = function(){
-		var partial = this.text.replace(this.cloze, '...');
 		if (partial == this.text){
 			console.log("No cloze or cloze was not in text.");
 		}

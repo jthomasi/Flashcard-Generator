@@ -1,5 +1,6 @@
 var Basic = require('./BasicCard');
 var Cloze = require('./ClozeCard');
+var JSON = require('./cards');
 var inquirer = require("inquirer");
 var basic_cards = [];
 var cloze_cards = [];
@@ -7,15 +8,12 @@ initialCards();
 
 function initialCards() {
 
-	var newBasic = new Basic("Who was the first president of the United States?","George Washington");
-	basic_cards.push(newBasic);
-	var newBasic = new Basic("Who is the creator of the first automobile?","Karl Benz");
-	basic_cards.push(newBasic);
+	for (var i=0;i<JSON.data.length;i++){
 
-	var newCloze = new Cloze("The wheels on the bus go round and round","round and round");
-	cloze_cards.push(newCloze);
-	var newCloze = new Cloze("Luke, I am your father","father");
-	cloze_cards.push(newCloze);
+		var newBasic = new Basic(JSON.basicData[i].front, JSON.basicData[i].back);
+		basic_cards.push(newBasic);
+
+	}
 
 	run();
 
@@ -155,7 +153,7 @@ function questionsCloze(i){
 	  {
 	  	type: "input",
 	    name: "flashcard",
-	    message: cloze_cards[i].cloze
+	    message: cloze_cards[i].partial
 	  }
 	]).then(function(answers) {
 	  
