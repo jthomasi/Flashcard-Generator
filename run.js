@@ -44,6 +44,8 @@ function createBasic() {
 
 	  run();
 
+	  //run the main screen
+
 	});
 }
 
